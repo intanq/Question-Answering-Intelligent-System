@@ -2,7 +2,7 @@ import os
 from flask import Flask, flash, render_template, request, redirect
 from werkzeug.utils import secure_filename
 from image_to_string import recognize_image_to_string
-from qa_model import predict_answer_1, format_answer
+from qa_model import predict_answer, format_answer
 from context_retriever import query_to_text, summarize_context
 
 
@@ -41,26 +41,21 @@ def home():
             full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             # Image recognition
             question = recognize_image_to_string(full_filename).lower()
-            # question = request.form['question']
-            # contexts = query_to_text(question, n=3)
-            # contexts_google = query_to_text(question, n=3) >>
-            # context_wikipedia = search_wiki(question) >>
-            # answer = best_answer(question, contexts_google, context_wikipedia) >>
-            # answer = answer_question(model, question, contexts)
+            # Get the chosen type of context
             chosen_context = request.form['contexts']
             formatted_answer = ''
             if chosen_context == '1':                 # Web scrapping one website and not summarise it
                 contexts_google = query_to_text(question, n=3)
-                answer, probability = predict_answer_1(question, contexts_google[0])
+                answer, probability = predict_answer(question, contexts_google[0])
                 # formatted_answer = answer, probability
                 formatted_answer = format_answer(answer, probability)
             elif chosen_context == '2':               # Web scrapping from one website and summarise it
                 summarised_context = summarize_context(query_to_text(question, n=3)[0])
-                answer, probability = predict_answer_1(question, summarised_context)
+                answer, probability = predict_answer(question, summarised_context)
                 formatted_answer = format_answer(answer, probability)
             else:                                     # Provide your own context
                 context = request.form['typeYourContext']
-                answer, probability = predict_answer_1(question, context)
+                answer, probability = predict_answer(question, context)
                 formatted_answer = format_answer(answer, probability)
 
             print(formatted_answer)
