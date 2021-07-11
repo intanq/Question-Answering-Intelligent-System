@@ -59,15 +59,6 @@ def query_to_text(query, n):
     return text
 
 
-# DO WIKIPEDIA SEARCH AND RETURN A SUMMARY OF A RELEVANT PAGE
-def search_wiki (query):
-    try:
-        summary = wikipedia.summary(query)
-        return summary
-    except wikipedia.exceptions.DisambiguationError as e:
-        return "Ambiguous"
-
-
 def summarize_context(context):
     # Tokenizing the context
     the_stopwords = set(stopwords.words("english"))
