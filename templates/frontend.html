@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Let us answer your question! (Hopefully)</title>
+<!--    <style>-->
+<!--        #hidden_div {-->
+<!--        display: none;-->
+<!--        }-->
+<!--    </style>-->
+</head>
+<body>
+    <div class="container">
+        <div class="container">
+            <h1 class="text-center" style="margin:50px;">Hello! I am an AI that is ready to answer your question! Hopefully I get it right!</h1>
+        </div>
+        <div class="container">
+            <form action="" enctype=multipart/form-data method="post">
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image" accept="image/*" aria-describedby="imageHelp">
+                    <small id="imageHelp" class="form-text text-muted">I will try to read the question from your image.</small>
+                </div>
+                <div class="form-group">
+                    <label for="contexts">Choose Type of Context</label>
+                    <select class="form-control" id="contexts" name="contexts" required>
+                        <option value="1" selected>Web Scrapping The Most Relevant Website (Not Summarised)</option>
+                        <option value="2">Web Scrapping The Most Relevant Website and Summarised</option>
+                        <option value="3">Provide My Own Context</option>
+                    </select>
+                </div>
+                <div class="form-group" id="contextTextArea" style="display: none;">
+                    <label for="typeYourContext">Example textarea</label>
+                    <textarea class="form-control" id="typeYourContext" name="typeYourContext" rows="3"></textarea>
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="question">Question</label>-->
+<!--                    <input type="text" class="form-control" id="question" name="question" aria-describedby="questionHelp" placeholder="Enter your question">-->
+<!--                    <small id="questionHelp" class="form-text text-muted">I will try to answer as accurate as I can.</small>-->
+<!--                </div>-->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.getElementById('contexts').addEventListener('change', function () {
+            var style = this.value == 3 ? 'block' : 'none';
+            document.getElementById('contextTextArea').style.display = style;
+        });
+    </script>
+</body>
+</html>
