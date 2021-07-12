@@ -1,20 +1,18 @@
 import logging
 from simpletransformers.question_answering import QuestionAnsweringModel, QuestionAnsweringArgs
-from context_retriever import query_to_text, summarize_context
+
 
 logging.basicConfig(level=logging.INFO)
 transformers_logger = logging.getLogger("transformers")
 transformers_logger.setLevel(logging.WARNING)
 
-# DistilBERT: a method to pre-train a smaller general-purpose language representation model
-# A distilled version of BERT: smaller, faster, cheaper and lighter
-model_args = QuestionAnsweringArgs()
 
+# INITIALIZE THE MODEL - distilbert-base-uncased-distilled-squad
 model = QuestionAnsweringModel(
-    'distilbert', 'distilbert-base-uncased-distilled-squad', use_cuda=False, args=model_args
+    'distilbert', 'distilbert-base-uncased-distilled-squad', use_cuda=False
 )
 
-# PREDICT ANSWER - USE A SINGLE STRING CONTEXT, RETURN (answer, probability)
+# FUNCTION TO ANSWER THE QUESTION
 def predict_answer(question, context):
     to_predict = [
         {
