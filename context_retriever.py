@@ -6,7 +6,6 @@ from nltk import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
 from markdown import markdown
-import wikipedia
 
 
 # DO GOOGLE SEARCH AND RETURN n RELEVANT URLS
